@@ -18,7 +18,7 @@
 			</i>
 		</center>
 		<div class="col-sm-12 col-md-10 col-md-offset-1">
-			<form>
+			<form ng-model-options="{ debounce: 250 }"> 
 				<table class="table table-hover">
 					<thead>
 						<tr>
