@@ -69,6 +69,8 @@ public class DBConfig {
 		Map<String, Object> properties = new HashMap();
 		properties.put("hibernate.show_sql", true);
 		properties.put("hibernate.format_sql", true);
+		properties.put("hibernate.search.default.directory_provider", "filesystem");
+		properties.put("hibernate.search.default.indexBase", "c:/hib-lucyna");
 
 		return properties;
 	}

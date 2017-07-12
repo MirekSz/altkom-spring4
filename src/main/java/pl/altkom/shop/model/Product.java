@@ -11,18 +11,26 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 import pl.altkom.shop.FileSize;
 
 @Entity
+@Indexed
 public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	@NotEmpty
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
 	private String name;
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
 	private String description;
 	@NotNull
 	private Integer quantity;

@@ -312,6 +312,13 @@
 			<artifactId>javamelody-core</artifactId>
 			<version>1.62.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-orm -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-search-orm</artifactId>
+    <version>5.6.2.Final</version>
+</dependency>
+
 	</dependencies>
 
 	<packaging>war</packaging>
