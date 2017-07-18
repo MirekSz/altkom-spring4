@@ -71,6 +71,8 @@ public class DBConfig {
 		properties.put("hibernate.format_sql", true);
 		properties.put("hibernate.search.default.directory_provider", "filesystem");
 		properties.put("hibernate.search.default.indexBase", "c:/hib-lucyna");
+		// properties.put("hibernate.search.default.worker.backend",
+		// "pl.altkom.shop.SolrIntegration");
 
 		return properties;
 	}

@@ -86,6 +86,12 @@
 			<version>3.7.4</version>
 			<scope>provided</scope>
 		</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
+<dependency>
+    <groupId>org.apache.solr</groupId>
+    <artifactId>solr-solrj</artifactId>
+    <version>6.6.0</version>
+</dependency>
 
 		<dependency>
 			<groupId>com.mysema.querydsl</groupId>
