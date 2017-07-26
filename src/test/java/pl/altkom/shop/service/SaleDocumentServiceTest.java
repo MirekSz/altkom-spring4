@@ -33,8 +33,8 @@ import pl.altkom.shop.repo.SaleDocumentSearcher;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = CoreConfig.class)
-@Rollback
 @Transactional
+@Rollback
 @ActiveProfiles("test")
 @WebAppConfiguration
 public class SaleDocumentServiceTest {
@@ -80,8 +80,9 @@ public class SaleDocumentServiceTest {
 		SaleDocumentSearcher saleDocumentSearcher = new SaleDocumentSearcher();
 		saleDocumentSearcher.where = QProduct.product.name.startsWithIgnoreCase("mirek");
 		saleDocumentSearcher.orderBy = QSaleDocument.saleDocument.no.desc();
-		Iterable<SaleDocument> findSaleDocument = saleDocumentRepo
-				.findAll(QProduct.product.name.startsWithIgnoreCase("mirek"), QSaleDocument.saleDocument.no.desc());
+		saleDocumentRepo.findSaleDocument(saleDocumentSearcher);
+		Iterable<SaleDocument> findSaleDocument = saleDocumentRepo.findAll(QSaleDocument.saleDocument.no.eq(1L),
+				QSaleDocument.saleDocument.no.desc());
 
 		// then
 		assertThat(findSaleDocument).isEmpty();
