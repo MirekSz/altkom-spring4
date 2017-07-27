@@ -85,7 +85,23 @@ public class SaleDocumentServiceTest {
 				QSaleDocument.saleDocument.no.desc());
 
 		// then
-		assertThat(findSaleDocument).isEmpty();
+		assertThat(findSaleDocument).isNotEmpty();
+	}
+
+	@Test
+	public void shoulFindSaleDocumentsByQueryDSLSearcher() throws Exception {
+		// given
+		Product product = repo.getAll().get(0);
+
+		// when
+		SaleDocumentSearcher saleDocumentSearcher = new SaleDocumentSearcher();
+		saleDocumentSearcher.where = QProduct.product.name.startsWithIgnoreCase(product.getName())
+				.and(QProduct.product.description.eq(product.getDescription()));
+		saleDocumentSearcher.orderBy = QSaleDocument.saleDocument.no.desc();
+		List<SaleDocumentInfo> findSaleDocument = saleDocumentRepo.findSaleDocument(saleDocumentSearcher);
+
+		// then
+		assertThat(findSaleDocument).isNotEmpty();
 	}
 
 	@Test
@@ -94,7 +110,7 @@ public class SaleDocumentServiceTest {
 
 		// when
 		Iterable<SaleDocument> findSaleDocument = saleDocumentRepo.findAll(QSaleDocument.saleDocument.id.isNotNull(),
-				new PageRequest(1, 10, new QSort(QSaleDocument.saleDocument.no.asc())));
+				new PageRequest(0, 10, new QSort(QSaleDocument.saleDocument.no.asc())));
 
 		// then
 		assertThat(findSaleDocument).isNotEmpty();

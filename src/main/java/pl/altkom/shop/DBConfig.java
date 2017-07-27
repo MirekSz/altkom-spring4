@@ -2,6 +2,7 @@ package pl.altkom.shop;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -69,8 +70,11 @@ public class DBConfig {
 		Map<String, Object> properties = new HashMap();
 		properties.put("hibernate.show_sql", true);
 		properties.put("hibernate.format_sql", true);
-		properties.put("hibernate.search.default.directory_provider", "filesystem");
-		properties.put("hibernate.search.default.indexBase", "c:/hib-lucyna");
+		properties.put("hibernate.search.default.directory_provider", "ram");
+		// properties.put("hibernate.search.default.directory_provider",
+		// "filesystem");
+		// properties.put("hibernate.search.default.indexBase",
+		// "c:/hib-lucyna");
 		// properties.put("hibernate.search.default.worker.backend",
 		// "pl.altkom.shop.SolrIntegration");
 
