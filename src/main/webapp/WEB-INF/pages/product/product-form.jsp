@@ -13,22 +13,22 @@
 
 	<form:hidden path="id" />
 	<spring:bind path="name">
-	<div class="form-group ${status.error ? 'has-error' : ''}">
-		<label class="col-sm-2 control-label">Name</label>
-		<div class="col-sm-8">
-			<form:input path="name" class="form-control" />
-			<form:errors path="name" />
+		<div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Name</label>
+			<div class="col-sm-8">
+				<form:input path="name" class="form-control" />
+				<form:errors path="name" />
+			</div>
 		</div>
-	</div>
 	</spring:bind>
 	<spring:bind path="quantity">
-	<div class="form-group ${status.error ? 'has-error' : ''}">
-		<label class="col-sm-2 control-label">Quantity</label>
-		<div class="col-sm-8">
-			<form:input path="quantity" class="form-control" />
-			<form:errors path="quantity" />
+		<div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Quantity</label>
+			<div class="col-sm-8">
+				<form:input path="quantity" class="form-control" />
+				<form:errors path="quantity" />
+			</div>
 		</div>
-	</div>
 	</spring:bind>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Price</label>
