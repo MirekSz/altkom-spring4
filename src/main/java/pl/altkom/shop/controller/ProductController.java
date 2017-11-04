@@ -73,10 +73,6 @@ public class ProductController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String submitForm(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult,
 			@RequestParam("file") MultipartFile file) throws Exception {
-
-		String a = null;
-		a.toCharArray();
-
 		FileUtils.copyInputStreamToFile(file.getInputStream(), getDestFile(file));
 
 		product.setFileName(file.getOriginalFilename());
