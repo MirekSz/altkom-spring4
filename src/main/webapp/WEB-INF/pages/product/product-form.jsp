@@ -12,36 +12,28 @@
 	action="${contextPath}/product/save">
 
 	<form:hidden path="id" />
-	<spring:bind path="name">
-	<div class="form-group ${status.error ? 'has-error' : ''}">
+	<div class="form-group">
 		<label class="col-sm-2 control-label">Name</label>
 		<div class="col-sm-8">
 			<form:input path="name" class="form-control" />
-			<form:errors path="name" />
 		</div>
 	</div>
-	</spring:bind>
-	<spring:bind path="quantity">
-	<div class="form-group ${status.error ? 'has-error' : ''}">
+	<div class="form-group">
 		<label class="col-sm-2 control-label">Quantity</label>
 		<div class="col-sm-8">
 			<form:input path="quantity" class="form-control" />
-			<form:errors path="quantity" />
 		</div>
 	</div>
-	</spring:bind>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Price</label>
 		<div class="col-sm-8">
 			<form:input path="price" class="form-control" />
-			<form:errors path="price" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Description</label>
 		<div class="col-sm-8">
 			<form:textarea path="description" class="form-control" />
-			<form:errors path="description" />
 		</div>
 	</div>
 	<button type="submit" class="btn btn-primary pull-right">
