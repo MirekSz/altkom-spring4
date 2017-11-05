@@ -9,6 +9,7 @@ import javax.persistence.PersistenceUnit;
 
 import org.springframework.stereotype.Repository;
 
+import pl.altkom.shop.aop.Monitoring;
 import pl.altkom.shop.model.Product;
 
 @Repository
@@ -65,6 +66,7 @@ public class HibernateProductRepo implements ProductRepo {
 	}
 
 	@Override
+	@Monitoring
 	public List<Product> getAll() {
 		EntityManager em = startTx();
 		return em.createQuery("FROM Product p").getResultList();

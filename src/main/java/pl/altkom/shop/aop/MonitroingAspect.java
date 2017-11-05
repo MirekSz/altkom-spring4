@@ -15,8 +15,6 @@ import org.springframework.stereotype.Component;
 public class MonitroingAspect {
 	Logger log = Logger.getLogger(MonitroingAspect.class);
 
-	public static boolean ENABLED = false;
-
 	@Pointcut("@within(org.springframework.stereotype.Service)")
 	public void allServices() {
 	}
@@ -25,28 +23,25 @@ public class MonitroingAspect {
 	public void allRepos() {
 	}
 
-	@Around("@annotation(pl.altkom.shop.aop.Monitoring) ")
+	@Around("@annotation(pl.altkom.shop.aop.Monitoring)")
 	public Object monitpr(ProceedingJoinPoint pjp) throws Throwable {
-		if (ENABLED) {
-			MethodSignature ms = (MethodSignature) pjp.getSignature();
-			Method m = ms.getMethod();
+		MethodSignature ms = (MethodSignature) pjp.getSignature();
+		Method m = ms.getMethod();
 
-			Object target = pjp.getTarget();
-			Method declaredMethod = target.getClass().getDeclaredMethod(m.getName());
+		Object target = pjp.getTarget();
+		Method declaredMethod = target.getClass().getDeclaredMethod(m.getName());
 
-			long max = declaredMethod.getAnnotation(Monitoring.class).maxTime();
-			long currentTimeMillis = System.currentTimeMillis();
-			Object obj = pjp.proceed();
-			long end = System.currentTimeMillis() - currentTimeMillis;
+		long currentTimeMillis = System.currentTimeMillis();
+		Object obj = pjp.proceed();
+		long end = System.currentTimeMillis() - currentTimeMillis;
+
+		Monitoring annotation = declaredMethod.getAnnotation(Monitoring.class);
+		if (annotation != null && end > annotation.maxTime()) {
+			log.error(m + " took: " + end);
+		} else {
 			log.info(m + " took: " + end);
-			if (end > max) {
-				log.error(m + " took: " + end);
-			} else {
-				log.info(m + " took: " + end);
-			}
-			return obj;
 		}
-		return pjp.proceed();
+		return obj;
 	}
 
 }
