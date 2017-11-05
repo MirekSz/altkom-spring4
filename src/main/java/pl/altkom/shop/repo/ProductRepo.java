@@ -2,7 +2,6 @@ package pl.altkom.shop.repo;
 
 import java.util.List;
 
-import pl.altkom.shop.aop.Monitoring;
 import pl.altkom.shop.model.Product;
 
 public interface ProductRepo {
@@ -16,6 +15,5 @@ public interface ProductRepo {
 
 	public void update(Product product);
 
-	@Monitoring
 	public List<Product> getAll();
 }
