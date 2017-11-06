@@ -14,8 +14,6 @@
 		<logout logout-url="/logout" />
 	</http>
 	
-	<global-method-security secured-annotations="enabled" jsr250-annotations="enabled"/>
-	
 	<authentication-manager>
 		<authentication-provider >
 			<user-service>
