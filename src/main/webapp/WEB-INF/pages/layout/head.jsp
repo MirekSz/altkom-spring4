@@ -18,6 +18,7 @@
 <script type="text/javascript" src="${contextPath}/public/assets/js/nprogress.js"></script>
 </head>
 <sec:authentication var="user" property="principal" />
+<sec:authentication var="roles" property="authorities" />
 <body>
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">

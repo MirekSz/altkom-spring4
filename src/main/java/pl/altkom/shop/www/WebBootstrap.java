@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.apache.cxf.transport.servlet.CXFServlet;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
@@ -31,6 +32,7 @@ public class WebBootstrap implements WebApplicationInitializer {
 
 		container.addListener(new ContextLoaderListener(ctx));
 		container.addListener(RequestContextListener.class);
+		container.addListener(HttpSessionEventPublisher.class);
 
 		Dynamic securityFiler = container.addFilter("springSecurityFilterChain",
 				new DelegatingFilterProxy("springSecurityFilterChain"));
@@ -43,7 +45,6 @@ public class WebBootstrap implements WebApplicationInitializer {
 		ServletRegistration.Dynamic cxf = container.addServlet("cxf", new CXFServlet());
 		cxf.addMapping("/services/*");
 		cxf.setLoadOnStartup(1);
-
 		utf8(container);
 	}
 
