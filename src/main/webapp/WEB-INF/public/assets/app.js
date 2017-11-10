@@ -10,7 +10,7 @@ function showPreview(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#preview').attr('src', e.target.result).show();
+            $('#preview').hide().width(300).attr('src', e.target.result).fadeIn(1000);
         }
 
         reader.readAsDataURL(input.files[0]);
