@@ -1,6 +1,8 @@
 package pl.altkom.shop.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,7 @@ public class Product {
 	private Integer quantity;
 	private BigDecimal price;
 	private String fileName;
+	private List<String> tags = new ArrayList();
 
 	public Product(String name, String description, int quentity, BigDecimal price) {
 		this.name = name;
@@ -75,6 +78,14 @@ public class Product {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
 	}
 
 }
