@@ -50,6 +50,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("index");
+		registry.addRedirectViewController("/api", "/swagger-ui.html");
 	}
 
 	@Bean

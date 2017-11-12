@@ -33,6 +33,11 @@ public class RestProductController {
 		repo.delete(id);
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Product find(@PathVariable("id") Long id) {
+		return repo.find(id);
+	}
+
 	@RequestMapping(method = RequestMethod.PUT)
 	public void update(@RequestBody Product product) {
 		repo.update(product);
