@@ -60,9 +60,32 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return resourceBundleMessageSource;
 	}
 
+	// @Override
+	// public void configureMessageConverters(List<HttpMessageConverter<?>>
+	// converters) {
+	// converters.add(converter());
+	// }
+	//
+	// @Bean
+	// MappingJackson2HttpMessageConverter converter() {
+	// MappingJackson2HttpMessageConverter converter = new
+	// MappingJackson2HttpMessageConverter();
+	// converter.setObjectMapper(objectMapper());
+	// return converter;
+	// }
+	//
+	// @Bean
+	// public ObjectMapper objectMapper() {
+	// ObjectMapper mapper = new ObjectMapper();
+	// mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+	// false);
+	// return mapper;
+	// }
+
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+
 		return commonsMultipartResolver;
 	}
 }
