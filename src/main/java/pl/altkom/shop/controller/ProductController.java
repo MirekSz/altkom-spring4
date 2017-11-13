@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,13 @@ import pl.altkom.shop.service.ProductService;
 @RequestMapping("/product")
 public class ProductController {
 	static File FILE_DIR = new File("c:\\files");
+	@Autowired
+	ConversionService cs;
+
+	@ModelAttribute("cs")
+	public ConversionService cs() {
+		return cs;
+	}
 
 	@Inject
 	ProductRepo repo;
@@ -73,9 +82,11 @@ public class ProductController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String submitForm(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult,
 			@RequestParam("file") MultipartFile file) throws Exception {
-		FileUtils.copyInputStreamToFile(file.getInputStream(), getDestFile(file));
+		if (!file.isEmpty()) {
+			FileUtils.copyInputStreamToFile(file.getInputStream(), getDestFile(file));
+			product.setFileName(file.getOriginalFilename());
+		}
 
-		product.setFileName(file.getOriginalFilename());
 		if (bindingResult.hasErrors()) {
 			return "product/product-form";
 		}

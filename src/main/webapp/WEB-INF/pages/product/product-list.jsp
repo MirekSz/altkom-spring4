@@ -1,13 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib tagdir="/WEB-INF/tags/altkom" prefix="altkom" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/WEB-INF/pages/layout/head.jsp"%>
-
 
 	<a href="new" class="btn btn-primary "> <i
 		class=" glyphicon glyphicon-plus"></i> Add new product
@@ -37,9 +36,9 @@
 			<c:forEach var="p" items="${products}">
 				<tr>
 					<td>${p.id} <img src="${p.id}/image"  onerror="this.style.display='none'" style="height:60px" alt=""></td>
-					<td>${p.name}</td>
+					<td>${p.name}   <altkom:print value="${p.addedTime}"/></td>
 					<td>${p.quantity}</td>
-					<td>${p.price}</td>
+					<td><altkom:print value="${p.price}"/></td>
 					<td>
 						<a href="${p.id}/edit"> <i class=" glyphicon glyphicon-pencil"></i></a>
 						<a href="${p.id}/delete"> <i class=" glyphicon glyphicon-remove-circle"></i></a>

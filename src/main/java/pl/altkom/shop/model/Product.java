@@ -1,6 +1,7 @@
 package pl.altkom.shop.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class Product {
 	private BigDecimal price;
 	private String fileName;
 	private List<String> tags = new ArrayList();
+	private LocalDateTime addedTime = LocalDateTime.now();
 
 	public Product(String name, String description, int quentity, BigDecimal price) {
 		this.name = name;
@@ -86,6 +88,14 @@ public class Product {
 
 	public void setTags(List<String> tags) {
 		this.tags = tags;
+	}
+
+	public LocalDateTime getAddedTime() {
+		return addedTime;
+	}
+
+	public void setAddedTime(LocalDateTime addedTime) {
+		this.addedTime = addedTime;
 	}
 
 }

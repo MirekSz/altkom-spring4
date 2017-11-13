@@ -1,10 +1,16 @@
 package pl.altkom.shop.www;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatterBuilder;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -21,6 +27,39 @@ import pl.altkom.shop.lib.Profiles;
 @EnableWebMvc
 @Profile(Profiles.WEB)
 public class WebConfig extends WebMvcConfigurerAdapter {
+	public static class Con implements Converter<LocalDateTime, String> {
+
+		@Override
+		public String convert(LocalDateTime source) {
+			return source.format(new DateTimeFormatterBuilder().toFormatter());
+		}
+
+	}
+
+	public static class BigD implements Converter<BigDecimal, String> {
+
+		@Override
+		public String convert(BigDecimal source) {
+			return source + " $";
+		}
+
+	}
+
+	public static class BigD2 implements Converter<String, BigDecimal> {
+
+		@Override
+		public BigDecimal convert(String source) {
+			return new BigDecimal(source.split(" ")[0]);
+		}
+
+	}
+
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addConverter(new Con());
+		registry.addConverter(new BigD());
+		registry.addConverter(new BigD2());
+	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
