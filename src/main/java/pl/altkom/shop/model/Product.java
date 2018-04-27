@@ -26,6 +26,14 @@ public class Product {
 	private BigDecimal price;
 	private String imgLocation;
 
+	public Product(Long id, String name, String description, int quentity, BigDecimal price) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.setQuantity(quentity);
+		this.price = price;
+	}
+
 	public Product(String name, String description, int quentity, BigDecimal price) {
 		this.name = name;
 		this.description = description;
