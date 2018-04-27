@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.altkom.shop.model.Product;
-import pl.altkom.shop.repo.SpringDataProductRepo;
+import pl.altkom.shop.repo.ProductRepo;
 import pl.altkom.shop.service.ProductService;
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
 	@Inject
-	SpringDataProductRepo repo;
+	ProductRepo repo;
 	@Inject
 	ProductService service;
 
@@ -71,9 +71,9 @@ public class ProductController {
 		}
 
 		if (product.getId() != null) {
-			repo.save(product);
+			repo.update(product);
 		} else {
-			repo.save(product);
+			repo.insert(product);
 		}
 		return "redirect:/product/list";
 	}
