@@ -7,11 +7,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
 
-import org.springframework.stereotype.Repository;
-
 import pl.altkom.shop.model.Product;
 
-@Repository
+//@Repository
 public class HibernateProductRepo implements ProductRepo {
 	@PersistenceUnit
 	EntityManagerFactory emf;

@@ -30,6 +30,14 @@ public class Product {
 		this.price = price;
 	}
 
+	public Product(Long id, String name, String description, int quentity, BigDecimal price) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.setQuantity(quentity);
+		this.price = price;
+	}
+
 	public Product() {
 
 	}

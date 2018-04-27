@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @PropertySource(value = { "classpath:application.properties" })
@@ -28,15 +31,34 @@ public class DBConfig {
 	private String password;
 
 	@Bean
+	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+		return new JdbcTemplate(dataSource());
+	}
+
+	@Bean
 	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(driverClassName);
-		dataSource.setUrl(url);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
+		// // DriverManagerDataSource dataSource = new
+		// DriverManagerDataSource();
+		// // dataSource.setDriverClassName(driverClassName);
+		// // dataSource.setUrl(url);
+		// // dataSource.setUsername(username);
+		// // dataSource.setPassword(password);
+		// //
+		// // return dataSource;
+		//
+		// Pool
+		HikariConfig config = new HikariConfig();
+		config.setJdbcUrl(url);
+		config.setDriverClassName(driverClassName);
+		config.setUsername(username);
+		config.setPassword(password);
+		config.setMaximumPoolSize(10);
+		return new HikariDataSource(config);
 
-		return dataSource;
-
+		// JNDI
+		// JndiTemplate jndiTemplate = new JndiTemplate();
+		// return (DataSource)
+		// jndiTemplate.lookup("java:jboss/datasources/UsersDB");
 	}
 
 	@Bean
