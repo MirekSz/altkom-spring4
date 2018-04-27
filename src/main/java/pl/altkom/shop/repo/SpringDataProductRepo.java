@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import pl.altkom.shop.model.Product;
 
 @Repository
-public interface SpringDataProductRepo extends JpaRepository<Product, Long> {
+public interface SpringDataProductRepo extends JpaRepository<Product, Long>, SpringDataProductRepoCustom {
 	@Query("FROM Product")
 	List<Product> getAll();
 
