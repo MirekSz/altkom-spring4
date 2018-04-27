@@ -3,6 +3,7 @@ package pl.altkom.shop.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class RestProductController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Long> save(@RequestBody Product product) {
+	public ResponseEntity<Long> save(@RequestBody @Valid Product product) {
 		Long id = repo.insert(product);
 		return new ResponseEntity<Long>(id, HttpStatus.CREATED);
 	}
