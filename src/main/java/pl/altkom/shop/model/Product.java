@@ -16,6 +16,7 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	@NotEmpty
+	@FirstUpperLetter
 	private String name;
 	private String description;
 	@NotNull
