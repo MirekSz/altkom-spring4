@@ -39,6 +39,7 @@ public class ProductController {
 	@RequestMapping("/{id}/delete")
 	public String delte(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) throws Exception {
 		repo.delete(id);
+		redirectAttributes.addFlashAttribute("operationDone", true);
 		return "redirect:/product/list";
 	}
 
