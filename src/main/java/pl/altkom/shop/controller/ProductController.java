@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.altkom.shop.model.Product;
+import pl.altkom.shop.model.ProductValidator;
 import pl.altkom.shop.repo.ProductRepo;
 import pl.altkom.shop.service.ProductService;
 
@@ -27,6 +30,11 @@ public class ProductController {
 	ProductRepo repo;
 	@Inject
 	ProductService service;
+
+	@InitBinder
+	public void init(WebDataBinder binder) {
+		binder.addValidators(new ProductValidator());
+	}
 
 	@RequestMapping("/list")
 	public String list(Model model, @RequestParam(required = false, value = "page") Integer page,
