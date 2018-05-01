@@ -28,7 +28,7 @@
 	<thead>
 		<tr>
 			<th>Id</th>
-			<th><spring:message code="product.name" /></th>
+			<altkom:column name="name" title="product.name"></altkom:column>
 			<th><spring:message code="product.quantity" /></th>
 			<th><spring:message code="product.price" /></th>
 			<th><spring:message code="product.actions" /></th>
