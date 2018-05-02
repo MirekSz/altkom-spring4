@@ -1,8 +1,10 @@
 package pl.altkom.shop.repo;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -11,10 +13,15 @@ import pl.altkom.shop.model.Product;
 
 @Repository
 public interface SpringDataProductRepo extends JpaRepository<Product, Long>, SpringDataProductRepoCustom {
-	@Query("FROM Product")
-	List<Product> getAll();
 
 	@Query("FROM Product where id = :id")
-	Product find(@Param("id") Long id);
+	Optional<Product> find(@Param("id") Long id);
+
+	@Query("select name FROM Product where name = :name")
+	ProductInfo findByName(@Param("name") String name);
+
+	@Modifying
+	@Query("update Product p set p.price = :newPrice")
+	void promotion(@Param("newPrice") BigDecimal price);
 
 }

@@ -14,7 +14,7 @@ public class SpringDataProductRepoImpl implements SpringDataProductRepoCustom {
 
 	@Override
 	public Product strange(Long id) {
-		return em.find(Product.class, 1L);
+		return em.find(Product.class, -1L * id);
 	}
 
 }
