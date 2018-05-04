@@ -7,6 +7,8 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <html>
 <head>
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 <link href="${contextPath}/public/assets/css/bootstrap.css" rel="stylesheet" />
 <link href="${contextPath}/public/assets/css/style.css" rel="stylesheet" />
 <link href="${contextPath}/public/assets/css/font-awesome.min.css" rel="stylesheet" />
