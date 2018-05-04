@@ -1,11 +1,13 @@
 package pl.altkom.shop.controller;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.altkom.shop.model.Product;
@@ -27,17 +30,19 @@ public class ProductController {
 	ProductRepo repo;
 	@Inject
 	ProductService service;
+	@Inject
+	RestTemplate restTempalte;
 
 	@RequestMapping("/list")
 	public String list(Model model, @RequestParam(required = false, value = "page") Integer page,
-			@RequestParam(required = false, value = "orderBy") String orderBy) throws Exception {
-
+			@RequestParam(required = false, value = "orderBy") String orderBy, Principal user) throws Exception {
 		model.addAttribute("page", page);
 		model.addAttribute("orderBy ", orderBy);
 
 		List<Product> products = repo.getAll();
 		model.addAttribute("products", products);
-
+		ResponseEntity<Product[]> entity = restTempalte.getForEntity("http://localhost:8060/spring-shop/api/products",
+				Product[].class);
 		return "product/product-list";
 	}
 
