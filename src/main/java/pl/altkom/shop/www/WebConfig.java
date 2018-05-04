@@ -1,11 +1,22 @@
 package pl.altkom.shop.www;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.client.ClientHttpRequestExecution;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -33,7 +44,22 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public RestTemplate restTemplate() {
-		return new RestTemplate();
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+
+		messageConverters.add(new MappingJackson2HttpMessageConverter());
+		RestTemplate template = new RestTemplate();
+		template.setMessageConverters(messageConverters);
+		template.getInterceptors().add(new ClientHttpRequestInterceptor() {
+
+			@Override
+			public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
+					throws IOException {
+				String headerValue = "JSESSIONID=" + RequestContextHolder.getRequestAttributes().getSessionId();
+				request.getHeaders().set("Cookie", headerValue);
+				return execution.execute(request, body);
+			}
+		});
+		return template;
 	}
 
 	@Bean

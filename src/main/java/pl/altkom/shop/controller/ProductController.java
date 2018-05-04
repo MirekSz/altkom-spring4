@@ -39,10 +39,11 @@ public class ProductController {
 		model.addAttribute("page", page);
 		model.addAttribute("orderBy ", orderBy);
 
-		List<Product> products = repo.getAll();
-		model.addAttribute("products", products);
+		// List<Product> products = repo.getAll();
 		ResponseEntity<Product[]> entity = restTempalte.getForEntity("http://localhost:8060/spring-shop/api/products",
 				Product[].class);
+		model.addAttribute("products", entity.getBody());
+		System.out.println(entity);
 		return "product/product-list";
 	}
 
