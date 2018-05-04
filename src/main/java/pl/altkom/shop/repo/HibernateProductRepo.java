@@ -18,6 +18,7 @@ public class HibernateProductRepo implements ProductRepo {
 	EntityManager em;
 
 	@Override
+	// @PreAuthorize("hasRole('ROLE_ADMIN') OR #product.quantity > 0")
 	public Long insert(Product product) {
 		em.persist(product);
 		return product.getId();
